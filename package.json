@@ -6,6 +6,11 @@
     "start": "node ./bin/www",
     "test": "mocha test/**/*.js --reporter spec"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mraypold/timezone-finder.git"
+  },
+  "author": "Michael Raypold <raypold@ualberta.ca>",
   "dependencies": {
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
