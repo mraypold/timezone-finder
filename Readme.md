@@ -15,7 +15,7 @@ Request:
 
 Response:
 ```json
-      { 
+      [{ 
         "type": "Feature",
         "geometry": {
             "type": "MultiPolygon", 
@@ -26,7 +26,7 @@ Response:
             "code": "PDT",
             "coords": [48.407326, -123.329773]
             }
-       }
+       }]
 ```
 
 ### Installation
