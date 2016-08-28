@@ -4,7 +4,7 @@
 
 An express.js based microservice to retrieve a GeoJSON representation (timezone code/name + polygon) of a timezone using the requested coordinate(s).
 
-This project is under active development, so expect major API changes over the comming months.
+This project is under active development, so expect major API changes over the coming months.
 
 ### Examples
 
