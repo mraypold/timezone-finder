@@ -31,13 +31,15 @@ Response:
 
 This microservice uses an in-memory database generated from a shapefile of all timezones that is downloaded from [here](http://efele.net/maps/tz/world/).
 
-Running `make` will download the zipfile, extract the shapefile containing timezones and install all required node modules. Do not use `npm install` as will not include the necessary shapefile. 
+Running `make` will download the zipfile, extract the shapefile containing timezones and install all required node modules. Do not use `npm install` as this will not include the necessary shapefile. 
 
 ### Running
 
 To run in development mode use `npm start`
 
 This application makes use of the cluster module, so an express instance will be started for each CPU core on the machine.
+
+You may find it convenient to disable clustering when debugging.
  
 ### Deployment
 
@@ -49,7 +51,7 @@ The included processes.json defines a basic configuration to start and watch the
 
 Simply run `pm2 start processes.json`.
 
-To stop the express application run `pm2 stop processes.json`.
+To stop the express application, run `pm2 stop processes.json`.
 
 You should further harden the application and reverse proxy through nginx (or other webserver) to suite your specific needs.
 
