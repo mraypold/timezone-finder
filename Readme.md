@@ -1,5 +1,7 @@
 # Timezone-Finder
 
+[![Build Status](https://travis-ci.org/mraypold/timezone-finder.svg?branch=master)](https://travis-ci.org/mraypold/timezone-finder)
+
 A simple microservice to retrieve a GeoJSON representation (timezone code/name + polygon) of a timezone using the requested coordinate(s).
 
 This project is under active development, so expect major API changes over the comming months.

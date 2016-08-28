@@ -11,6 +11,7 @@
     "url": "https://github.com/mraypold/timezone-finder.git"
   },
   "author": "Michael Raypold <raypold@ualberta.ca>",
+  "engine": "node 6.x",
   "dependencies": {
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
