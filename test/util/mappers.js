@@ -1,43 +1,39 @@
-'use strict';
-
 const expect = require('expect');
-const featuresMapper = require('../../util/mappers').featuresMapper;
+const { featuresMapper } = require('../../util/mappers');
 
 let lng;
 let lat;
 let features;
 
-beforeEach(function() {
+beforeEach(() => {
   lng = -123.329773;
   lat = 48.407326;
 
   features = [
     {
-      type: "Feature",
+      type: 'Feature',
       properties: { TZID: 'America/Vancouver' },
-      id: '33'
-    }
+      id: '33',
+    },
   ];
 });
 
-describe('Mappers', function() {
-
-  describe('Feature Collection', function() {
-    it('FeatureCollectionMapper adds timezone code property', function() {
-      expect(["PST", "PDT"]).toContain(featuresMapper(features, lng, lat)[0].properties.code);
+describe('Mappers', () => {
+  describe('Feature Collection', () => {
+    it('FeatureCollectionMapper adds timezone code property', () => {
+      expect(['PST', 'PDT']).toContain(featuresMapper(features, lng, lat)[0].properties.code);
     });
 
-    it('FeatureCollectionMapper adds coord property', function() {
+    it('FeatureCollectionMapper adds coord property', () => {
       expect(featuresMapper(features, lng, lat)[0].properties.coords).toEqual([lng, lat]);
     });
 
-    it('FeatureCollectionMapper removes id property', function() {
+    it('FeatureCollectionMapper removes id property', () => {
       expect(featuresMapper(features, lng, lat)[0].properties.id).toNotExist();
     });
 
-    it('FeatureCollectionMapper removes TZID property', function() {
+    it('FeatureCollectionMapper removes TZID property', () => {
       expect(featuresMapper(features, lng, lat)[0].properties.TZID).toNotExist();
     });
   });
-
 });

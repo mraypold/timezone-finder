@@ -1,10 +1,6 @@
-'use strict';
-
 const moment = require('moment-timezone');
 
-module.exports = (function() {
-  'use strict';
-
+module.exports = {
   /**
    * Adds timezone codes to a all properties for each feature in the feature collection.
    *
@@ -13,13 +9,12 @@ module.exports = (function() {
    * @param {number} lat The latitude to append to the response.
    * @returns {object} A GeoJSON feature with timezone support and renamed properties.
    */
-  const featuresMapper = function(features, lng, lat, timestamp) {
-    features.map(feature => {
-    
-      const tz = timestamp 
-                  ? moment.tz(`${timestamp}`, 'X', feature.properties.TZID) 
-                  : moment().tz(feature.properties.TZID);
-      
+  featuresMapper: (features, lng, lat, timestamp) => {
+    features.map((feature) => {
+      const tz = timestamp
+        ? moment.tz(`${timestamp}`, 'X', feature.properties.TZID)
+        : moment().tz(feature.properties.TZID);
+
       // Get the timezone abbreviation
       feature.properties.code = tz.zoneAbbr();
 
@@ -38,10 +33,12 @@ module.exports = (function() {
 
       // Remove unnecessary id which is only needed by Terraformer.
       delete feature.id;
+
+      return feature;
     });
 
     return features;
-  };
+  },
 
   /**
    * Adds timezone codes to a all properties for each feature in the feature collection.
@@ -52,24 +49,19 @@ module.exports = (function() {
    * @param {string} timestamp The time for determining daylight savings time
    * @returns {object} A collection of object literals with renamed properties.
    */
-  const propertiesMapper = function(features, lng, lat, timestamp) {
-    return features.map(feature => {
-      const tz = timestamp 
-                  ? moment.tz(`${timestamp}`, 'X', feature.properties.TZID) 
-                  : moment().tz(feature.properties.TZID);
- 
+  propertiesMapper: (features, lng, lat, timestamp) =>
+    features.map((feature) => {
+      const tz = timestamp
+        ? moment.tz(`${timestamp}`, 'X', feature.properties.TZID)
+        : moment().tz(feature.properties.TZID);
+
       return {
         code: tz.zoneAbbr(),
         offset: tz.format('Z'),
         offset_seconds: tz.utcOffset() * 60,
         coords: [lng, lat],
-        timezone: feature.properties.TZID
+        timezone: feature.properties.TZID,
       };
-    });
-  };
+    }),
+};
 
-  return {
-    featuresMapper: featuresMapper,
-    propertiesMapper: propertiesMapper 
-  };
-}());

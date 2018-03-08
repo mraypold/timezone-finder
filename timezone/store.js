@@ -1,14 +1,14 @@
 const shapefile = require('shapefile');
-const GeoStore = require('terraformer-geostore').GeoStore;
-const RTree = require('terraformer-rtree').RTree;
+const { GeoStore } = require('terraformer-geostore');
+const { RTree } = require('terraformer-rtree');
 const GeostoreMemory = require('terraformer-geostore-memory').Memory;
 
 /**
  * Creates a new store for handling quering GeoJson collections.
  */
-let store = new GeoStore({
+const store = new GeoStore({
   store: new GeostoreMemory(),
-  index: new RTree()
+  index: new RTree(),
 });
 
 /**
@@ -21,8 +21,9 @@ let store = new GeoStore({
 function addIdToFeatureCollection(collection) {
   let id = 0;
 
-  collection.features.map(feature => {
-    feature.id = (id++).toString(); // Terraformer library throws errors if id is a number.
+  collection.features.map((feature) => {
+    feature.id = (id += 1).toString(); // Terraformer library throws errors if id is a number.
+    return feature;
   });
 
   return collection;

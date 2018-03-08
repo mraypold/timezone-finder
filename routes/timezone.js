@@ -1,29 +1,27 @@
-'use strict';
-
-var express = require('express');
-var router = express.Router();
+const express = require('express');
 const latValidate = require('../util/coord-validation').validateLatitude;
 const lngValidate = require('../util/coord-validation').validateLongitude;
-const featuresMapper = require('../util/mappers').featuresMapper;
-const propertiesMapper = require('../util/mappers').propertiesMapper;
+const { featuresMapper } = require('../util/mappers');
+const { propertiesMapper } = require('../util/mappers');
 
-function queryPoint (req, lng, lat, cb) {
+const router = express.Router();
 
+function queryPoint(req, lng, lat, cb) {
   const point = {
-    "type": "Point",
-    "coordinates": [lng, lat]
+    type: 'Point',
+    coordinates: [lng, lat],
   };
 
   req.timezoneStore.contains(point, cb);
 }
 
-router.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+router.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
   const lng = req.query.lng;
   const lat = req.query.lat;
 
@@ -37,7 +35,7 @@ router.use(function (req, res, next) {
     return res.status(400).send('Malformed longitude or latitude values');
   }
 
-  next();
+  return next();
 });
 
 /**
@@ -46,12 +44,12 @@ router.use(function (req, res, next) {
  * Url parameters are lng and lat, representing longitude and latitude.
  * @returns {object} A response object
  */
-router.get('/geoJSON', function(req, res, next) {
+router.get('/geoJSON', (req, res) => {
   const lng = req.query.lng;
   const lat = req.query.lat;
   const timestamp = req.query.timestamp;
-  queryPoint(req, lng, lat, function(error, features) {
 
+  queryPoint(req, lng, lat, (error, features) => {
     if (error) {
       return res.status(500);
     }
@@ -61,7 +59,7 @@ router.get('/geoJSON', function(req, res, next) {
       features = featuresMapper(features, lng, lat, timestamp);
     }
 
-    res.json(features);
+    return res.json(features);
   });
 });
 
@@ -71,12 +69,12 @@ router.get('/geoJSON', function(req, res, next) {
  * Url parameters are lng and lat, representing longitude and latitude.
  * @returns {object} A response object
  */
-router.get(['/json', '/'], function(req, res, next) {
+router.get(['/json', '/'], (req, res) => {
   const lng = req.query.lng;
   const lat = req.query.lat;
   const timestamp = req.query.timestamp;
-  queryPoint(req, lng, lat, function(error, features) {
 
+  queryPoint(req, lng, lat, (error, features) => {
     if (error) {
       return res.status(500);
     }
@@ -86,7 +84,7 @@ router.get(['/json', '/'], function(req, res, next) {
       features = propertiesMapper(features, lng, lat, timestamp);
     }
 
-    res.json(features);
+    return res.json(features);
   });
 });
 
