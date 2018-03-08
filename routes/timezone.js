@@ -51,7 +51,7 @@ router.get('/geoJSON', function(req, res, next) {
   const lat = req.query.lat;
   const timestamp = req.query.timestamp;
   queryPoint(req, lng, lat, function(error, features) {
-    
+
     if (error) {
       return res.status(500);
     }
@@ -76,7 +76,7 @@ router.get(['/json', '/'], function(req, res, next) {
   const lat = req.query.lat;
   const timestamp = req.query.timestamp;
   queryPoint(req, lng, lat, function(error, features) {
-    
+
     if (error) {
       return res.status(500);
     }
