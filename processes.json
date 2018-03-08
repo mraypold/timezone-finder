@@ -1,17 +1,19 @@
 {
-  apps : [{
-    name        : 'timezone-finder',
-    script      : './bin/www',
-    watch       : true,
-    max_memory_restart  : '2G',
-    env: {
-      "NODE_ENV": "production",
-    },
-    env_development: {
-      "NODE_ENV": "development",
-    },
-    env_production : {
-      "NODE_ENV": "production"
+  "apps": [
+    {
+      "name": "timezone-finder",
+      "script": "./bin/www",
+      "watch": true,
+      "max_memory_restart": "2G",
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "env_development": {
+        "NODE_ENV": "development"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
     }
-  }]
+  ]
 }
