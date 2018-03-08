@@ -24,7 +24,7 @@ describe('Mappers', function() {
 
   describe('Feature Collection', function() {
     it('FeatureCollectionMapper adds timezone code property', function() {
-      expect(featuresMapper(features, lng, lat)[0].properties.code).toEqual("PDT");
+      expect(["PST", "PDT"]).toContain(featuresMapper(features, lng, lat)[0].properties.code);
     });
 
     it('FeatureCollectionMapper adds coord property', function() {
