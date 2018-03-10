@@ -42,15 +42,17 @@ function addCollectionToStore(collection) {
 /**
  * Inserts a GeoJson object into the Terraformer memory store if it exists.
  *
- * @param {object} error The error encountered when parsing the shapefile
  * @param {object} collection A GeoJson collection read from the shapefile.
  * @return {undefined}
  */
-function addShapefileCollectionToStore(error, collection) { // TODO handle error here.
+function addShapefileCollectionToStore(collection) {
   const collectionWithId = addIdToFeatureCollection(collection);
   addCollectionToStore(collectionWithId);
 }
 
-shapefile.read('./world/tz_world_mp.shp', addShapefileCollectionToStore);
+shapefile
+  .read('./world/tz_world_mp.shp')
+  .then(response => addShapefileCollectionToStore(response))
+  .catch(err => console.error(err));
 
 module.exports = store;

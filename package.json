@@ -21,7 +21,7 @@
     "moment-timezone": "^0.5.5",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0",
-    "shapefile": "^0.3.1",
+    "shapefile": "^0.6.6",
     "terraformer-geostore": "^1.0.4",
     "terraformer-geostore-memory": "^1.0.0",
     "terraformer-rtree": "^1.0.0"
