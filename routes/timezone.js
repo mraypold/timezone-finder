@@ -13,7 +13,7 @@ function queryPoint(req, lng, lat, cb) {
     coordinates: [lng, lat],
   };
 
-  req.timezoneStore.contains(point, cb);
+  req.timezoneRepository.contains(point, cb);
 }
 
 router.use((req, res, next) => {

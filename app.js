@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const timezoneRoute = require('./routes/timezone');
 
 // An in-memory database of timezones
-const timezoneStore = require('./timezone/store');
+const timezoneRepository = require('./repositories/timezone');
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Make the timezone store accessible to all routes
 app.use((req, res, next) => {
-  req.timezoneStore = timezoneStore;
+  req.timezoneRepository = timezoneRepository;
   next();
 });
 
