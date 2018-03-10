@@ -6,6 +6,7 @@ const { propertiesMapper } = require('../util/mappers');
 
 const router = express.Router();
 
+// TODO maybe this should return a promise instead
 function queryPoint(req, lng, lat, cb) {
   const point = {
     type: 'Point',

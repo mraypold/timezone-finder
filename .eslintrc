@@ -3,7 +3,9 @@
   "globals" : {
     "describe": true,
     "beforeEach": true,
-    "test": true
+    "beforeAll": true,
+    "test": true,
+    "expect": true
   },
   "rules": {
     "no-param-reassign": 0,
