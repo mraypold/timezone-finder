@@ -1,5 +1,10 @@
 {
   "extends": "airbnb-base",
+  "globals" : {
+    "describe": true,
+    "beforeEach": true,
+    "test": true
+  },
   "rules": {
     "no-param-reassign": 0,
     "prefer-destructuring": "off"

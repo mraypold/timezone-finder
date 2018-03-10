@@ -20,19 +20,19 @@ beforeEach(() => {
 
 describe('Mappers', () => {
   describe('Feature Collection', () => {
-    it('FeatureCollectionMapper adds timezone code property', () => {
+    test('FeatureCollectionMapper adds timezone code property', () => {
       expect(['PST', 'PDT']).toContain(featuresMapper(features, lng, lat)[0].properties.code);
     });
 
-    it('FeatureCollectionMapper adds coord property', () => {
+    test('FeatureCollectionMapper adds coord property', () => {
       expect(featuresMapper(features, lng, lat)[0].properties.coords).toEqual([lng, lat]);
     });
 
-    it('FeatureCollectionMapper removes id property', () => {
+    test('FeatureCollectionMapper removes id property', () => {
       expect(featuresMapper(features, lng, lat)[0].properties.id).toNotExist();
     });
 
-    it('FeatureCollectionMapper removes TZID property', () => {
+    test('FeatureCollectionMapper removes TZID property', () => {
       expect(featuresMapper(features, lng, lat)[0].properties.TZID).toNotExist();
     });
   });
