@@ -4,7 +4,11 @@
       "name": "timezone-finder",
       "script": "./bin/www",
       "watch": true,
-      "max_memory_restart": "2G",
+      "ignore_watch" : ["node_modules"],
+      "watch_options": {
+        "followSymlinks": false
+      },
+      "max_memory_restart": "1500M",
       "env": {
         "NODE_ENV": "production"
       },
