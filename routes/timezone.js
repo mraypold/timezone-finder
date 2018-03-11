@@ -37,6 +37,7 @@ router.get('/geoJSON', cors(), isPointRequest, (req, res) => {
       features = featuresMapper(features, lng, lat, timestamp);
     }
 
+    // TODO what if the repository finds nothing?
     return res.json(features);
   });
 });

@@ -18,7 +18,7 @@ lint:
 	npm run lint
 
 .PHONY: test
-test:
+test: install lint
 	npm run test
 
 clean-zip:
