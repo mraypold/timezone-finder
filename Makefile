@@ -17,8 +17,12 @@ install:
 lint:
 	npm run lint
 
+.PHONY: secure
+secure:
+	npm run secure
+
 .PHONY: test
-test: install lint
+test: install lint secure
 	npm run test
 
 clean-zip:

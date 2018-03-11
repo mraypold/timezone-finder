@@ -1,6 +1,7 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
 
 const timezoneRoute = require('./routes/timezone');
 
@@ -10,6 +11,7 @@ const timezoneRepository = require('./repositories/timezone');
 const app = express();
 
 app.use(logger('dev'));
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
