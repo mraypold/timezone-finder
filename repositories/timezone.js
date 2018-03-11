@@ -1,13 +1,13 @@
 const shapefile = require('shapefile');
 const { GeoStore } = require('terraformer-geostore');
 const { RTree } = require('terraformer-rtree');
-const GeostoreMemory = require('terraformer-geostore-memory').Memory;
+const { Memory } = require('terraformer-geostore-memory');
 
 /**
  * Creates a new store for handling quering GeoJson collections.
  */
 const store = new GeoStore({
-  store: new GeostoreMemory(),
+  store: new Memory(),
   index: new RTree(),
 });
 
