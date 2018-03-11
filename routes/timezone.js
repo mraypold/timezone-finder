@@ -35,8 +35,7 @@ router.get('/', cors(), isPointRequest, (req, res) => {
       features = propertiesMapper(features, lng, lat);
     }
 
-    // TODO this probably shouldn't be returning an array of features... one timezone
-    return res.json({ data: features });
+    return res.json({ data: features[0] });
   });
 });
 
