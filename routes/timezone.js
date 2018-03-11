@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { featuresMapper } = require('../util/mappers');
 const { propertiesMapper } = require('../util/mappers');
 const isPointRequest = require('../middleware/isPointRequest');
@@ -21,7 +22,7 @@ function queryPoint(req, lng, lat, cb) {
  * Url parameters are lng and lat, representing longitude and latitude.
  * @returns {object} A response object
  */
-router.get('/geoJSON', isPointRequest, (req, res) => {
+router.get('/geoJSON', cors(), isPointRequest, (req, res) => {
   const lng = req.query.lng;
   const lat = req.query.lat;
   const timestamp = req.query.timestamp;
@@ -46,7 +47,7 @@ router.get('/geoJSON', isPointRequest, (req, res) => {
  * Url parameters are lng and lat, representing longitude and latitude.
  * @returns {object} A response object
  */
-router.get(['/json', '/'], isPointRequest, (req, res) => {
+router.get(['/json', '/'], cors(), isPointRequest, (req, res) => {
   const lng = req.query.lng;
   const lat = req.query.lat;
   const timestamp = req.query.timestamp;
