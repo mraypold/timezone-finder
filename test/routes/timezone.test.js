@@ -66,8 +66,8 @@ describe('Timezone route', () => {
             offset: expect.stringMatching(/-08:00|-07:00/),
             offset_seconds: expect.any(Number),
             coords: [
-              '-123.329773',
-              '48.407326',
+              -123.329773,
+              48.407326,
             ],
             timezone: 'America/Vancouver',
           },
@@ -94,8 +94,8 @@ describe('Timezone route', () => {
             offset: '-03:00',
             offset_seconds: -10800,
             coords: [
-              '-43.182365',
-              '-22.970722',
+              -43.182365,
+              -22.970722,
             ],
             timezone: 'America/Sao_Paulo',
           },
