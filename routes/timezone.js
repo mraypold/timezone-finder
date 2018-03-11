@@ -38,7 +38,7 @@ router.get('/geoJSON', cors(), isPointRequest, (req, res) => {
     }
 
     // TODO what if the repository finds nothing?
-    return res.json(features);
+    return res.json({ data: features });
   });
 });
 
@@ -63,7 +63,8 @@ router.get(['/json', '/'], cors(), isPointRequest, (req, res) => {
       features = propertiesMapper(features, lng, lat, timestamp);
     }
 
-    return res.json(features);
+    // TODO this probably shouldn't be returning an array of features... one timezone
+    return res.json({ data: features });
   });
 });
 

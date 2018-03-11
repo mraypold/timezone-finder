@@ -59,6 +59,9 @@ describe('Timezone route', () => {
         .then((response) => {
           expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
           expect(response.status).toBe(200);
+          expect(response.body).toEqual(expect.objectContaining({
+            data: expect.any(Object),
+          }));
           done();
         });
     });
