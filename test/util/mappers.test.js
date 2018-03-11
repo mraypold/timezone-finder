@@ -1,4 +1,3 @@
-const expect = require('expect');
 const { featuresMapper } = require('../../util/mappers');
 
 let lng;
@@ -29,11 +28,11 @@ describe('Mappers', () => {
     });
 
     test('FeatureCollectionMapper removes id property', () => {
-      expect(featuresMapper(features, lng, lat)[0].properties.id).toNotExist();
+      expect(featuresMapper(features, lng, lat)[0].properties.id).toBe(undefined);
     });
 
     test('FeatureCollectionMapper removes TZID property', () => {
-      expect(featuresMapper(features, lng, lat)[0].properties.TZID).toNotExist();
+      expect(featuresMapper(features, lng, lat)[0].properties.TZID).toBe(undefined);
     });
   });
 });

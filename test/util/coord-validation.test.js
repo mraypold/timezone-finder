@@ -1,4 +1,3 @@
-const expect = require('expect');
 const { validateLatitude, validateLongitude } = require('../../util/coord-validation');
 
 describe('Longitude/Latitude Validation', () => {
