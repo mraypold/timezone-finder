@@ -53,6 +53,10 @@ function addShapefileCollectionToStore(collection) {
 shapefile
   .read('./world/tz_world_mp.shp')
   .then(response => addShapefileCollectionToStore(response))
-  .catch(err => console.error(err));
+  .catch((err) => {
+    console.error('Unable to load the shapefile into the geostore');
+    console.error(err);
+    process.exit(1);
+  });
 
 module.exports = store;
