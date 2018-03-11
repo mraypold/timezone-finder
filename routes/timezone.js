@@ -5,7 +5,14 @@ const isPointRequest = require('../middleware/isPointRequest');
 
 const router = express.Router();
 
-// TODO maybe this should return a promise instead
+/**
+ * Queries the timezone repository for the given longitude and latitude.
+ *
+ * @param {object} req A node http request
+ * @param {number} lng A longitude
+ * @param {number} lat A latitude
+ * @param {function} cb The callback to return with and error or geojson features.
+ */
 function queryPoint(req, lng, lat, cb) {
   const point = {
     type: 'Point',
