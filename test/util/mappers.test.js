@@ -11,7 +11,7 @@ beforeEach(() => {
   features = [
     {
       type: 'Feature',
-      properties: { TZID: 'America/Vancouver' },
+      properties: { tzid: 'America/Vancouver' },
       id: '33',
     },
   ];

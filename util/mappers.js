@@ -1,5 +1,7 @@
 const moment = require('moment-timezone');
 
+// TODO we really need better tests here
+
 module.exports = {
   /**
    * Adds timezone codes to a all properties for each feature in the feature collection.
@@ -12,8 +14,8 @@ module.exports = {
   featuresMapper: (features, lng, lat, timestamp) => {
     features.map((feature) => {
       const tz = timestamp
-        ? moment.tz(`${timestamp}`, 'X', feature.properties.TZID)
-        : moment().tz(feature.properties.TZID);
+        ? moment.tz(`${timestamp}`, 'X', feature.properties.tzid)
+        : moment().tz(feature.properties.tzid);
 
       // Get the timezone abbreviation
       feature.properties.code = tz.zoneAbbr();
@@ -28,8 +30,8 @@ module.exports = {
       feature.properties.coords = [lng, lat];
 
       // Rename TZID to timezone
-      feature.properties.timezone = feature.properties.TZID;
-      delete feature.properties.TZID;
+      feature.properties.timezone = feature.properties.tzid;
+      delete feature.properties.tzid;
 
       // Remove unnecessary id which is only needed by Terraformer.
       delete feature.id;
@@ -52,15 +54,15 @@ module.exports = {
   propertiesMapper: (features, lng, lat, timestamp) =>
     features.map((feature) => {
       const tz = timestamp
-        ? moment.tz(`${timestamp}`, 'X', feature.properties.TZID)
-        : moment().tz(feature.properties.TZID);
+        ? moment.tz(`${timestamp}`, 'X', feature.properties.tzid)
+        : moment().tz(feature.properties.tzid);
 
       return {
         code: tz.zoneAbbr(),
         offset: tz.format('Z'),
         offset_seconds: tz.utcOffset() * 60,
         coords: [lng, lat],
-        timezone: feature.properties.TZID,
+        timezone: feature.properties.tzid,
       };
     }),
 };

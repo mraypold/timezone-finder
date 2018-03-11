@@ -1,13 +1,14 @@
-SHAPEFILE_TARGET = 'http://efele.net/maps/tz/world/tz_world_mp.zip'
-ZIP_TARGET = 'timezones.zip'
+GEOJSON_TARGET = 'https://github.com/evansiroky/timezone-boundary-builder/releases/download/2017c/timezones.geojson.zip'
+ZIP_TARGET = 'timezones.geojson.zip'
 
-all: download-timezones unzip-timezones install clean-zip lint test
+all: download-timezones unzip-timezones clean-zip install lint secure test
 
 download-timezones:
-	curl -o $(ZIP_TARGET) $(SHAPEFILE_TARGET)
+	curl -Lo $(ZIP_TARGET) $(GEOJSON_TARGET)
 
 unzip-timezones:
 	unzip $(ZIP_TARGET)
+	mv dist/combined.json data/timezones.json
 
 .PHONY: install
 install:
@@ -26,8 +27,9 @@ test: install lint secure
 	npm run test
 
 clean-zip:
-	rm $(ZIP_TARGET)
+	rm -f $(ZIP_TARGET)
+	rm -rf dist/
 
 clean: clean-zip
-	rm -rf 'world'
-	rm -rf 'node_modules'
+	rm -f data/timezones.json
+	rm -rf node_modules

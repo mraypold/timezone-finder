@@ -23,7 +23,6 @@
     "moment": "^2.14.1",
     "moment-timezone": "^0.5.5",
     "morgan": "^1.9.0",
-    "shapefile": "^0.6.6",
     "terraformer-geostore": "^1.0.4",
     "terraformer-geostore-memory": "^1.0.0",
     "terraformer-rtree": "^1.0.0"

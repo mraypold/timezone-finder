@@ -174,5 +174,5 @@ jspm_packages
 
 # Project specific files
 
-/world
+/data/timezones.json
 *.zip

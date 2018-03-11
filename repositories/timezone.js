@@ -1,7 +1,7 @@
-const shapefile = require('shapefile');
 const { GeoStore } = require('terraformer-geostore');
 const { RTree } = require('terraformer-rtree');
 const { Memory } = require('terraformer-geostore-memory');
+const timezones = require('../data/timezones.json');
 
 /**
  * Creates a new store for handling quering GeoJson collections.
@@ -30,16 +30,6 @@ function addIdToFeatureCollection(collection) {
 }
 
 /**
- * Adds a GeoJson feature collection to the Terraformer memory store.
- *
- * @param {object} collection A GeoJson feature collection.
- * @returns {undefined}
- */
-function addCollectionToStore(collection) {
-  store.add(collection); // if we fail to read the shapfile, shutdown the server TODO
-}
-
-/**
  * Inserts a GeoJson object into the Terraformer memory store if it exists.
  *
  * @param {object} collection A GeoJson collection read from the shapefile.
@@ -47,16 +37,20 @@ function addCollectionToStore(collection) {
  */
 function addShapefileCollectionToStore(collection) {
   const collectionWithId = addIdToFeatureCollection(collection);
-  addCollectionToStore(collectionWithId);
+
+  store.add(collectionWithId, (err, res) => {
+    if (err) {
+      console.error('Unable to load the timezone repositry GeoJSON!');
+      console.error(err);
+      process.exit(1);
+    }
+
+    if (res) {
+      console.info('Loaded the timezone repository.');
+    }
+  });
 }
 
-shapefile
-  .read('./world/tz_world_mp.shp')
-  .then(response => addShapefileCollectionToStore(response))
-  .catch((err) => {
-    console.error('Unable to load the shapefile into the geostore');
-    console.error(err);
-    process.exit(1);
-  });
+addShapefileCollectionToStore(timezones);
 
 module.exports = store;
