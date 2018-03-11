@@ -1,8 +1,7 @@
 const express = require('express');
-const latValidate = require('../util/coord-validation').validateLatitude;
-const lngValidate = require('../util/coord-validation').validateLongitude;
 const { featuresMapper } = require('../util/mappers');
 const { propertiesMapper } = require('../util/mappers');
+const isPointRequest = require('../middleware/isPointRequest');
 
 const router = express.Router();
 
@@ -16,36 +15,13 @@ function queryPoint(req, lng, lat, cb) {
   req.timezoneRepository.contains(point, cb);
 }
 
-router.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
-
-router.use((req, res, next) => {
-  const lng = req.query.lng;
-  const lat = req.query.lat;
-
-  // Return 400 Bad Request if missing longitude or latitude
-  if (lng === undefined || lat === undefined) {
-    return res.status(400).send('Missing longitude or latitude values');
-  }
-
-  // Return 400 Bad Request if malformed longitude or latitude values
-  if (!lngValidate(lng) || !latValidate(lat)) {
-    return res.status(400).send('Malformed longitude or latitude values');
-  }
-
-  return next();
-});
-
 /**
  * Returns GeoJSON if the requested coordinates are within a timezone, else a 400 error.
  *
  * Url parameters are lng and lat, representing longitude and latitude.
  * @returns {object} A response object
  */
-router.get('/geoJSON', (req, res) => {
+router.get('/geoJSON', isPointRequest, (req, res) => {
   const lng = req.query.lng;
   const lat = req.query.lat;
   const timestamp = req.query.timestamp;
@@ -70,7 +46,7 @@ router.get('/geoJSON', (req, res) => {
  * Url parameters are lng and lat, representing longitude and latitude.
  * @returns {object} A response object
  */
-router.get(['/json', '/'], (req, res) => {
+router.get(['/json', '/'], isPointRequest, (req, res) => {
   const lng = req.query.lng;
   const lat = req.query.lat;
   const timestamp = req.query.timestamp;

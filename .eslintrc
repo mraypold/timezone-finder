@@ -5,6 +5,7 @@
     "beforeEach": true,
     "beforeAll": true,
     "test": true,
+    "jest": true,
     "expect": true
   },
   "rules": {
