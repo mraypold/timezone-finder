@@ -22,6 +22,15 @@ module.exports = {
           parseFloat(lat),
         ],
         timezone: feature.properties.tzid,
+        iso: tz.toISOString(),
+        iso_day_of_week: tz.isoWeekday(),
+        iso_week_of_year: tz.isoWeek(),
+        day_of_year: tz.dayOfYear(),
+        week_of_year: tz.week(),
+        month_of_year: tz.month(),
+        year: tz.year(),
+        dst: tz.isDST(),
+        leap: tz.isLeapYear(),
       };
     }),
 };

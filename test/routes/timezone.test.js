@@ -69,6 +69,15 @@ describe('Timezone route', () => {
             48.407326,
           ],
           timezone: 'America/Vancouver',
+          iso: expect.any(String),
+          iso_day_of_week: expect.any(Number),
+          iso_week_of_year: expect.any(Number),
+          day_of_year: expect.any(Number),
+          week_of_year: expect.any(Number),
+          month_of_year: expect.any(Number),
+          year: expect.any(Number),
+          dst: expect.any(Boolean),
+          leap: expect.any(Boolean),
         },
       };
 
@@ -95,6 +104,15 @@ describe('Timezone route', () => {
             -22.970722,
           ],
           timezone: 'America/Sao_Paulo',
+          iso: expect.any(String),
+          iso_day_of_week: expect.any(Number),
+          iso_week_of_year: expect.any(Number),
+          day_of_year: expect.any(Number),
+          week_of_year: expect.any(Number),
+          month_of_year: expect.any(Number),
+          year: expect.any(Number),
+          dst: expect.any(Boolean),
+          leap: expect.any(Boolean),
         },
       };
 

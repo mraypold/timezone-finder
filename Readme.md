@@ -24,7 +24,16 @@ Response:
             -123.329773,
             48.407326
         ],
-        "timezone": "America/Vancouver"
+        "timezone": "America/Vancouver",
+        "iso": "2018-03-15T21:34:11.403Z",
+        "iso_day_of_week": 4,
+        "iso_week_of_year": 11,
+        "day_of_year": 74,
+        "week_of_year": 11,
+        "month_of_year": 2,
+        "year": 2018,
+        "dst": true,
+        "leap": false
     }
 }
 ```
