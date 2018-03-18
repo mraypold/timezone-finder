@@ -176,3 +176,5 @@ jspm_packages
 
 /data/timezones.json
 *.zip
+
+/benchamrk/result.txt

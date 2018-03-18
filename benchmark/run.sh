@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 
 for duration in 30s
 do
-  for connections in 100 200 300 400
+  for connections in 100 200
   do
     for thread in 1 2
     do
