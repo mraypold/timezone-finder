@@ -30,6 +30,10 @@ clean-zip:
 	rm -f $(ZIP_TARGET)
 	rm -rf dist/
 
+.PHONY: benchmark
+benchmark:
+	./benchmark/run.sh
+
 clean: clean-zip
 	rm -f data/timezones.json
 	rm -rf node_modules
