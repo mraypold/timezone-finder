@@ -1,7 +1,7 @@
 GEOJSON_TARGET = 'https://github.com/evansiroky/timezone-boundary-builder/releases/download/2017c/timezones.geojson.zip'
 ZIP_TARGET = 'timezones.geojson.zip'
 
-all: download-timezones unzip-timezones clean-zip install lint secure test
+all: download-timezones unzip-timezones clean-zip install lint test
 
 download-timezones:
 	curl -Lo $(ZIP_TARGET) $(GEOJSON_TARGET)
@@ -18,12 +18,8 @@ install:
 lint:
 	npm run lint
 
-.PHONY: secure
-secure:
-	npm run secure
-
 .PHONY: test
-test: install lint secure
+test: install lint
 	npm run test
 
 clean-zip:

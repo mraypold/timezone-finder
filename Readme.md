@@ -42,7 +42,7 @@ Response:
 
 This microservice uses an in-memory database generated from a geojson of all timezones that is downloaded from [here](http://efele.net/maps/tz/world/).
 
-Running `make` will download the zipfile, extract the shapefile containing timezones and install all required node modules. Do not use `npm install` as this will not include the necessary geojson.
+Running `make` will download the zipfile, extract the shapefile containing timezones and install all required node modules. Do not use `npm install` as this will not include the necessary geojson. Before running `make`, you should run `nvm use` to set your execution environment to use the same environment of node.js that this service is built with.
 
 ### Running
 

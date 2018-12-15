@@ -96,9 +96,9 @@ describe('Timezone route', () => {
       const route = encodeURI(`${baseUrl}?lat=-22.970722&lng=-43.182365`);
       const expectedResponse = {
         data: {
-          code: '-03',
-          offset: '-03:00',
-          offset_seconds: -10800,
+          code: expect.any(String),
+          offset: expect.any(String),
+          offset_seconds: expect.any(Number),
           coords: [
             -43.182365,
             -22.970722,
