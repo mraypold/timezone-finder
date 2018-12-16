@@ -1,0 +1,10 @@
+.*
+node_modules
+*.log
+benchmark*
+LICENSE
+jest.config.js
+Makefile
+test*
+*.md
+*.sh

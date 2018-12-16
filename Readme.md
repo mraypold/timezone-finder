@@ -2,9 +2,7 @@
 
 [![Build Status](https://travis-ci.org/mraypold/timezone-finder.svg?branch=master)](https://travis-ci.org/mraypold/timezone-finder)
 
-An express.js based microservice to retrieve a timezone for the requested coordinates.
-
-This project is under active development, so expect major API changes over the coming months.
+An slow and non-hardened express.js based microservice to retrieve a timezone for the requested coordinates.
 
 ### Examples
 
@@ -40,35 +38,34 @@ Response:
 
 ### Installation
 
-This microservice uses an in-memory database generated from a geojson of all timezones that is downloaded from [here](http://efele.net/maps/tz/world/).
+Install node version manager and then run `nvm use` to use same version of node.js that this application was developed on.
 
-Running `make` will download the zipfile, extract the shapefile containing timezones and install all required node modules. Do not use `npm install` as this will not include the necessary geojson. Before running `make`, you should run `nvm use` to set your execution environment to use the same environment of node.js that this service is built with.
+Running `make` will download the zipfile, extract the shapefile containing timezones and install all required node modules. Do not use `npm install` as this will not include the necessary geojson.
 
 ### Running
 
-To run in development mode use `npm start`
+To run in development mode use `nvm use` and then`npm start`
 
 ### Deployment
 
-This repo has been configured to work with pm2, but it should be fairly easy to switch to your preferred process manager.
+A multistage Dockerfile has been included so that the application can be more easily packaged for deployment.
 
-Install pm2 globally using `npm install pm2 -g`.
+Running `./build.sh` will containerize the express application with a `timezone:latest` docker image. You may optionally pass a version number to `build.sh`, such that the generated tag will be `timezone:<version>`.
 
-The included processes.json defines a basic configuration to start and watch the express application.
+Then run `docker run -p 3000:3000 timezone:latest`.
 
-Simply run `pm2 start processes.json`.
+### Exposed Environment Variables
 
-To stop the express application, run `pm2 stop processes.json`.
+- `PORT` is the port that the application will be served on.
 
-You should further harden the application and reverse proxy through nginx (or other webserver) to suite your specific needs.
+### Some Notes on Performance
 
-Further reading:
-- [Process managers for Express apps](https://expressjs.com/en/advanced/pm.html)
-- [Production Best Practices: Security](https://expressjs.com/en/advanced/best-practice-security.html)
-- [Production best practices: performance and reliability](https://expressjs.com/en/advanced/best-practice-performance.html)
-- [Setting up Express with nginx and pm2](http://blog.danyll.com/setting-up-express-with-nginx-and-pm2/)
+This microservice is slow! You have been warned.
 
-### TODO
+Initial profiling reveals that this is due `terraformer-geostore` package, which shouldn't be unexpected as spatial calculations are quite intensive and node.js isn't suited for this type of computation.
 
-- Accept batch requests through POST
-- Handle timezones in the ocean.
+I'm currently investigating using [rbush](https://github.com/mourner/rbush) instead of terraform, which appears to be faster. If all else fails I may switch to spatialite and include the sqlite database in the docker container.
+
+### Known Problems
+
+- The application cannot return timezones when given a coordinate in the ocean.
