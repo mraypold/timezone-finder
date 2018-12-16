@@ -38,9 +38,9 @@ Response:
 
 ### Installation
 
-Install node version manager and then run `nvm use` to use same version of node.js that this application was developed on.
+Install node version manager and then run `nvm use` to use the same version of node.js that this application was developed on.
 
-Running `make` will download the zipfile, extract the shapefile containing timezones and install all required node modules. Do not use `npm install` as this will not include the necessary geojson.
+Running `make` will download the zipfile, extract the geojson containing timezones and install all required node modules. Do not use `npm install` as this will not include the necessary geojson.
 
 ### Running
 
@@ -60,11 +60,15 @@ Then run `docker run -p 3000:3000 timezone:latest`.
 
 ### Some Notes on Performance
 
-This microservice is slow! You have been warned.
+This microservice is slow when under full load! You have been warned.
 
-Initial profiling reveals that this is due `terraformer-geostore` package, which shouldn't be unexpected as spatial calculations are quite intensive and node.js isn't suited for this type of computation.
+Initial profiling reveals that this is due to the `terraformer-geostore` package, which shouldn't be unexpected as spatial calculations are quite intensive and node.js isn't suited for this type of computation.
 
-I'm currently investigating using [rbush](https://github.com/mourner/rbush) instead of terraform, which appears to be faster. If all else fails I may switch to spatialite and include the sqlite database in the docker container.
+I'm currently investigating using [rbush](https://github.com/mourner/rbush) instead of terraform, which appears to be faster. If all else fails, I may switch to spatialite and include the sqlite database in the docker container.
+
+If performance is a serious concern, you would probably be better off implementing a similar microservice in golang using [BuntDB](https://github.com/tidwall/buntdb).
+
+I chose to use node.js because it is more familar to me and I wanted to see if I could package a self-contained service with no database dependencies. Thus, the in-memory `terraform-geostore` was selected.
 
 ### Known Problems
 
